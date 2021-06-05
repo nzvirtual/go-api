@@ -22,17 +22,29 @@ type ICache interface {
 var cache ICache
 
 func Connect(options *Options) *ICache {
+	var c ICache
+	var err error
+
 	if strings.ToLower(options.Driver) == "redis" {
-		log.Category("cache").Debug("Connecting to Redis")
-		c, err := ConnectRedis(options)
-		log.Category("cache").Debug("Connection ready")
+		log.Category("cache").Debug("Configuring redis driver")
+		c, err = ConnectRedis(options)
 		if err != nil {
 			log.Category("cache").Fatal("Error connecting to Redis " + err.Error())
 			panic("Error connecting to redis")
 		}
-
-		cache = c
+	} else if strings.ToLower(options.Driver) == "memcache" {
+		log.Category("cache").Debug("Configuring memcache driver")
+		c, err = ConnectMemcache(options)
+		if err != nil {
+			log.Category("cache").Fatal("Error configuring Memcache " + err.Error())
+			panic("Error connecting to memcache")
+		}
+	} else {
+		log.Category("cache").Fatal("No/Invalid cache driver configured")
+		panic("No/Invalid cache driver configured")
 	}
+
+	cache = c
 }
 
 func Get(key string, defaultValue string) (string, error) {

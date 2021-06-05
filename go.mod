@@ -3,6 +3,7 @@ module github.com/nzvirtual/go-api
 go 1.16
 
 require (
+	github.com/bradfitz/gomemcache v0.0.0-20190913173617-a41fca850d0b // indirect
 	github.com/common-nighthawk/go-figure v0.0.0-20200609044655-c4b36f998cf2 // indirect
 	github.com/dhawton/log4g v0.99.1 // indirect
 	github.com/gin-gonic/gin v1.7.2 // indirect

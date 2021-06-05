@@ -25,9 +25,21 @@ func ConnectRedis(options *Options) (*RedisCache, error) {
 }
 
 func (r *RedisCache) Set(key string, value string) (bool, error) {
+	err := r.rdb.Set(ctx, key, value, 0).Err()
+	if err != nil {
+		return false, err
+	}
+
 	return true, nil
 }
 
 func (r *RedisCache) Get(key string, defaultValue string) (string, error) {
-	return "", nil
+	val, err := r.rdb.Get(ctx, key).Result()
+	if err == redis.Nil {
+		return defaultValue, nil
+	} else if err != nil {
+		return "", err
+	}
+
+	return val, nil
 }
