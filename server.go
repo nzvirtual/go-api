@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/nzvirtual/go-api/middleware"
 )
 
 type Server struct {
@@ -13,20 +14,7 @@ func NewServer(appenv string) *Server {
 
 	engine := gin.New()
 	engine.Use(gin.Recovery())
-	engine.Use(Logger)
-	/*	engine.Use(gin.LoggerWithFormatter(func(param gin.LogFormatterParams) string {
-		return fmt.Sprintf("%s - [%s] %s %s %s %d %s \"%s\" %s\n",
-			param.ClientIP,
-			param.TimeStamp.Format(time.RFC3339),
-			param.Method,
-			param.Path,
-			param.Request.Proto,
-			param.StatusCode,
-			param.Latency,
-			param.Request.UserAgent(),
-			param.ErrorMessage,
-		)
-	}))*/
+	engine.Use(middleware.Logger)
 	server.engine = engine
 
 	SetupRoutes(engine)

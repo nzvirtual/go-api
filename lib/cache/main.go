@@ -21,7 +21,7 @@ type ICache interface {
 
 var cache ICache
 
-func Connect(options *Options) *ICache {
+func Connect(options *Options) {
 	var c ICache
 	var err error
 

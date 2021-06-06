@@ -5,6 +5,7 @@ go 1.16
 require (
 	github.com/bradfitz/gomemcache v0.0.0-20190913173617-a41fca850d0b // indirect
 	github.com/common-nighthawk/go-figure v0.0.0-20200609044655-c4b36f998cf2 // indirect
+	github.com/cristalhq/jwt/v3 v3.0.14 // indirect
 	github.com/dhawton/log4g v0.99.1 // indirect
 	github.com/gin-gonic/gin v1.7.2 // indirect
 	github.com/go-playground/validator/v10 v10.6.1 // indirect
